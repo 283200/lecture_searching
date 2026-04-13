@@ -2,7 +2,7 @@ from pathlib import Path
 import json
 
 
-def read_data(file_name, field):
+def read_data(file_to_read, klicek):
     """
     Reads a JSON file and returns data for a given field.
 
@@ -21,10 +21,16 @@ def read_data(file_name, field):
     cwd_path = Path.cwd()
     
     file_path = cwd_path / file_name
+    with open(file_to_read, "r", encoding="utf-8") as filik:
+        soubor = json.load(filik)
 
+        if klicek not in soubor:
+            return None
+        return soubor[klicek]
 
 def main():
-    pass
+    sequential_data = read_data('sequential.json', 'unordered_numbers')
+    print(sequential_data)
 
 
 if __name__ == "__main__":
