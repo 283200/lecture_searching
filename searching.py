@@ -1,6 +1,8 @@
 from pathlib import Path
 import json
-
+import time
+import matplotlib.pyplot as plt
+import generators
 
 def read_data(file_to_read, klicek):
     """
@@ -64,6 +66,27 @@ def main():
     ord_num=read_data('sequential.json', 'ordered_numbers')
     binarka=binary_search(ord_num, -12)
     print(binarka)
+    seznamek1=[]
+    for u in generators:
+        startik = time.perf_counter()
+        linear_search(sequential_data, 5)
+        endik = time.perf_counter()
+        rozdilek = endik - startik
+        seznamek1.append(rozdilek)
+    for v in generators:
+        seznamek2 = []
+        startik1 = time.perf_counter()
+        binary_search(ord_num, -12)
+        endik1 = time.perf_counter()
+        rozdilek1 = endik1 - startik1
+        seznamek2.append(rozdilek1)
+    print(seznamek1)
+    print(seznamek2)
+    plt.plot(seznamek1, seznamek2)
 
+    plt.xlabel("Velikost vstupu")
+    plt.ylabel("Čas [s]")
+    plt.title("Měření času běhu")
+    plt.show()
 if __name__ == "__main__":
     main()
