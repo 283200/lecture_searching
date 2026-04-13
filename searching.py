@@ -43,12 +43,27 @@ def linear_search(cast, cislicko):
         "count": kolikrat
     }
     return slovnicek
+def binary_search(seznam_cisilek, cislicko):
+    levacka=0
+    pravacka=len(seznam_cisilek)-1
+    while levacka<=pravacka:
+        index1 = (levacka + pravacka) // 2
+        if seznam_cisilek[index1]<cislicko:
+            levacka+=1
+        elif seznam_cisilek[index1]>cislicko:
+            pravacka-=1
+        elif seznam_cisilek[index1]==cislicko:
+            return index1
+    return None
 
 def main():
     sequential_data = read_data('sequential.json', 'unordered_numbers')
     print(sequential_data)
     kolik=linear_search(sequential_data, 5)
     print(kolik)
+    ord_num=read_data('sequential.json', 'ordered_numbers')
+    binarka=binary_search(ord_num, -12)
+    print(binarka)
 
 if __name__ == "__main__":
     main()
